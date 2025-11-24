@@ -7,7 +7,7 @@ function App() {
   const [error, setError] = useState(null);
   const [bgColor, setBgColor] = useState("#74ebd5");
 
-  // 🎨 Generate random color
+  //  Generate random color
   const getRandomColor = () => {
     const colors = [
       "#74ebd5",
@@ -24,13 +24,13 @@ function App() {
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
-  // 🌐 Fetch quote with fallback
+  //  Fetch quote 
   const fetchQuote = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      // Use dummyjson API (safe HTTPS)
+      
       const response = await fetch("https://dummyjson.com/quotes/random");
       if (!response.ok) throw new Error("Network response was not ok");
 
@@ -41,7 +41,7 @@ function App() {
     } catch (err) {
       console.error("Error fetching quote:", err);
 
-      // 🧩 Local fallback quotes
+      //  Local fallback quotes
       const backupQuotes = [
         { content: "Stay hungry, stay foolish.", author: "Steve Jobs" },
         { content: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" },
@@ -52,13 +52,13 @@ function App() {
 
       const random = backupQuotes[Math.floor(Math.random() * backupQuotes.length)];
       setQuote(random);
-      setError("⚠️ Using local quote (API unreachable)");
+      setError("Using local quote (API unreachable)");
       setBgColor(getRandomColor());
       setLoading(false);
     }
   };
 
-  // Load first quote on mount
+  // Load first quote 
   useEffect(() => {
     fetchQuote();
   }, []);
